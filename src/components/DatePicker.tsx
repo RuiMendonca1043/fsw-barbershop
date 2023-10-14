@@ -27,7 +27,7 @@ function DatePicker({ className, error, errorMessage, ...props }: InputProps, re
         timeCaption="time"
         timeIntervals={30}
         showTimeSelect
-        timeFormat="HH:mm z"
+        timeFormat="HH:mm"
         locale={enGB}
         wrapperClassName="w-full"
         className={datePickerClassName}
