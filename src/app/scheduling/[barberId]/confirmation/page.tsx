@@ -23,7 +23,7 @@ const ScheduleConfirmation = ({ params }: { params: { barberId: string } }) => {
     
     useEffect(()=>{
         const fetchBarber = async ()=>{
-        const response = await fetch(`http://localhost:3000/api/hello`, {
+        const response = await fetch(`/api/hello`, {
             method: 'POST',
             body: Buffer.from(
                 JSON.stringify({
@@ -50,7 +50,7 @@ const ScheduleConfirmation = ({ params }: { params: { barberId: string } }) => {
 
     const handleFinishClick = async () => {
         
-        const res = await fetch('http://localhost:3000/api/scheduling', {
+        const res = await fetch('/api/scheduling', {
             method: 'POST',
             body: Buffer.from(JSON.stringify({
                 barberId: params.barberId,

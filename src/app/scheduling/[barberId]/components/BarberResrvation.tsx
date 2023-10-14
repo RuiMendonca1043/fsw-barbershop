@@ -22,7 +22,7 @@ const BarberReservation = ({barber, dates}:BarberReservationProps) => {
     const router = useRouter();
     const onSubmit = async (data:SchedulingForm)=>{
         
-        const response = await fetch('http://localhost:3000/api/barber/check', {
+        const response = await fetch('/api/barber/check', {
             method: 'POST',
             body: Buffer.from(
                 JSON.stringify({
