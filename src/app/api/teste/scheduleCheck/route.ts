@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { scheduler } from "timers/promises";
 
 export async function POST(request:Request) {
     const req = await request.json()
@@ -22,17 +21,40 @@ export async function POST(request:Request) {
         }));
     }
 
-    // GET dos horarios disponiveis
-    const response = await fetch('/api/teste/availableHours',{
-        method:"POST",
-        body: Buffer.from(JSON.stringify({
+    // Buscar todos os schedules do dia 
+    const schedulesByDay = await prisma.scheduling.findMany({
+        where:{
             barberId,
             day
-        }))
+        }
     })
-    
-    const res = await response.json();
-    const {availableHours} = res; 
+
+    // Retirar apenas as horas ocupadas
+    const blockedHours = ["12:30","13:00","13:30"]
+    schedulesByDay.map(schedule => blockedHours.push(schedule.hour));
+
+    // Criar todos os horarios
+    function gerarHorarios(inicio: number, fim: number): string[] {
+        const horarios: string[] = [];
+        
+        for (let hora = inicio; hora <= fim; hora++) {
+          for (let minutos = 0; minutos < 60; minutos += 30) {
+            const horaFormatada = hora.toString().padStart(2, '0');
+            const minutosFormatados = minutos.toString().padStart(2, '0');
+            horarios.push(`${horaFormatada}:${minutosFormatados}`);
+          }
+        }
+      
+        return horarios;
+    }
+
+    // Retira os horarios indisponiveis
+    const availableHours = gerarHorarios(barber.start, barber.end)
+    blockedHours.map(b => {
+        if(availableHours.includes(b)){
+            availableHours.splice(availableHours.indexOf(b),1)
+        }
+    }) 
 
     // verifica se a hora requisitada esta disponivel
     if(availableHours.includes(hour)){

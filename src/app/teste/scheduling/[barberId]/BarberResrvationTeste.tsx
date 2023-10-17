@@ -38,7 +38,7 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
       };
     useEffect(()=>{
         const fetchHours =async (barberId:string, day: Date | null) => {
-            const response = await fetch('https://fsw-barbershop.vercel.app/api/teste/availableHours',{
+            const response = await fetch('/api/teste/availablehours',{
                 method: 'POST',
                 body: Buffer.from(JSON.stringify({
                     barberId,
@@ -56,7 +56,7 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
 
 
     const onSubmit =async (data:BarberReservationForm) => {
-        const response = await fetch('https://fsw-barbershop.vercel.app/api/teste/scheduleCheck',{
+        const response = await fetch('/api/teste/schedulecheck',{
             method: 'POST',
             body: Buffer.from(JSON.stringify({
                 barberId,
@@ -65,7 +65,7 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
             }))
         });
         const res = await response.json();
-
+        console.log(res)
         if (res?.error?.code === "BARBER_NOT_AVAILABLE") {
             setError("day", {
               type: "manual",

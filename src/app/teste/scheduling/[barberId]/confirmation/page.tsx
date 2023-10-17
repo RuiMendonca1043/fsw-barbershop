@@ -16,7 +16,7 @@ const SchedulingConfirmation = ({ params }: { params: { barberId: string } }) =>
     console.log('entrei')
     useEffect(()=>{
         const fetchSchedule =async () => {
-            const response = await fetch("https://fsw-barbershop.vercel.app/api/teste/scheduleCheck", {
+            const response = await fetch("/api/teste/schedulecheck", {
                 method:'POST',
                 body:JSON.stringify({
                     barberId: params.barberId,
@@ -43,7 +43,7 @@ const SchedulingConfirmation = ({ params }: { params: { barberId: string } }) =>
     }
 
     const handleConfirmClick =async () => {
-        const res = await fetch("https://fsw-barbershop.vercel.app/api/teste/createSchedule", {
+        const res = await fetch("/api/teste/createschedule", {
             method:'POST',
             body: Buffer.from(JSON.stringify({
                 barberId: barber.id,
@@ -65,9 +65,9 @@ const SchedulingConfirmation = ({ params }: { params: { barberId: string } }) =>
 
     return ( <div className="container mx-auto p-5 lg:max-w-[600px]">
     <h1 className="font-semibold text-xl text-primaryDarker">Sua Marcação</h1>  
-        <div className="flex flex-col p-5 mt-5 border-grayLighter border-solid border shadow-lg rounded-lg">
-            <div className="flex flex-col justify-center items-center gap-3 pb-5 border-b border-grayLighter border-solid">
-                <div className="flex gap-2">
+        <div className="flex flex-col p-5 mt-5 border-grayLighter border-solid border border-primary shadow-lg rounded-lg">
+            <div className="flex flex-col justify-center items-center gap-3 pb-5 border-b border-grayLighter border-primary border-solid">
+                <div className="flex gap-2 border-b border-primary">
                     <h2 className=" text-2xl text-primaryDarker font-semibold">{format(data, "dd 'de' MMMM", { locale: ptBR })}</h2>
                     <h2 className="text-2xl text-primaryDarker font-semibold">às {hour}h</h2>
                 </div>
