@@ -1,11 +1,9 @@
 import BarberItem from "@/components/BarberItemTeste";
+import { prisma } from "@/lib/prisma";
 import { Barber } from "@prisma/client";
 
 const getBarbers =async () => {
-  const response = await fetch('https://fsw-barbershop.vercel.app/api/teste/barber',{
-    method: 'GET'
-  }).then(res => res.json());
-  const {barbers} = response;
+  const barbers = await prisma.barber.findMany();
   return barbers;
 }
 
