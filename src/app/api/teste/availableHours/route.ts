@@ -56,9 +56,13 @@ export async function POST(request:Request) {
             availableHours.splice(availableHours.indexOf(b),1)
         }
     })
-
+    const headers = {
+        'Access-Control-Allow-Origin': 'https://fsw-barbershop-1baufh8nq-ruimendonca1043.vercel.app',
+      };
     return new NextResponse(JSON.stringify({ 
         success: true,
         availableHours
-    }),{status: 200});
+    }),{status: 200,
+    headers
+    });
 }
