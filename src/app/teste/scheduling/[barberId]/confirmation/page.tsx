@@ -18,6 +18,7 @@ const SchedulingConfirmation = ({ params }: { params: { barberId: string } }) =>
         const fetchSchedule =async () => {
             const response = await fetch("/api/teste/schedulecheck", {
                 method:'POST',
+                mode: 'no-cors',
                 body:JSON.stringify({
                     barberId: params.barberId,
                     day: searchParams.get('day'),
@@ -45,6 +46,7 @@ const SchedulingConfirmation = ({ params }: { params: { barberId: string } }) =>
     const handleConfirmClick =async () => {
         const res = await fetch("/api/teste/createschedule", {
             method:'POST',
+            mode: 'no-cors',
             body: Buffer.from(JSON.stringify({
                 barberId: barber.id,
                 day,

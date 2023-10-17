@@ -40,6 +40,7 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
         const fetchHours =async (barberId:string, day: Date | null) => {
             const response = await fetch('/api/teste/availablehours',{
                 method: 'POST',
+                mode: 'no-cors',
                 body: Buffer.from(JSON.stringify({
                     barberId,
                     day,
@@ -58,6 +59,7 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
     const onSubmit =async (data:BarberReservationForm) => {
         const response = await fetch('/api/teste/schedulecheck',{
             method: 'POST',
+            mode: 'no-cors',
             body: Buffer.from(JSON.stringify({
                 barberId,
                 day:data.day,
