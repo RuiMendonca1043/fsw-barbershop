@@ -25,7 +25,9 @@ export async function POST(request:Request) {
             barberId,
             dateTime: new Date(dateTime),
             name,
-            phoneNumber
+            phoneNumber,
+            day: new Date(),
+            hour: ''
         }
     })
 

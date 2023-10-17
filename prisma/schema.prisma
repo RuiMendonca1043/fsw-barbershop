@@ -17,6 +17,8 @@ model Barber {
   startTime DateTime
   endTime   DateTime
   schedules Scheduling[]
+  start     Int
+  end       Int
 }
 
 model Scheduling {
@@ -26,4 +28,6 @@ model Scheduling {
   dateTime    DateTime
   barber      Barber   @relation(fields: [barberId], references: [id])
   barberId    String
+  day         DateTime
+  hour        String
 }

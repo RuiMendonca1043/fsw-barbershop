@@ -21,7 +21,22 @@ const BarberReservation = ({barber, dates}:BarberReservationProps) => {
     const { register, handleSubmit, formState: {errors}, control, watch, setError } = useForm<SchedulingForm>();
     const router = useRouter();
     const onSubmit = async (data:SchedulingForm)=>{
-        
+        const dataHora = new Date(); // Substitua esta linha com a sua data e hora
+
+        // Define os limites de tempo: 9h e 19h30min
+        const horaInicio = new Date(dataHora);
+        horaInicio.setHours(9, 0, 0, 0);
+
+        const horaFim = new Date(dataHora);
+        horaFim.setHours(19, 30, 0, 0);
+
+        // Verifica se a data e hora estão entre as duas
+        if (dataHora < horaInicio && dataHora > horaFim) {
+            setError('dateTime', {
+                type: 'manual',
+                message: 'Este horário já esta reservado.'
+            })
+        }
         const response = await fetch('/api/barber/check', {
             method: 'POST',
             body: Buffer.from(
@@ -46,7 +61,7 @@ const BarberReservation = ({barber, dates}:BarberReservationProps) => {
             router.push(
                 `/scheduling/${barber?.id}/confirmation?dateTime=${data.dateTime}&name=${data.name}&phoneNumber=${data.phoneNumber}`
             );
-        }, 5000);
+        }, 1000);
         }
     
     };
