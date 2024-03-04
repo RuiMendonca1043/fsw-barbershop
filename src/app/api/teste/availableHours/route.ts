@@ -36,7 +36,7 @@ export async function POST(request:Request) {
 
     // Criar todos os horarios
     function gerarHorarios(inicio: number, fim: number): string[] {
-        const horarios: string[] = [];
+        const horarios: string[] = ['Selecionar horário'];
         
         for (let hora = inicio; hora <= fim; hora++) {
           for (let minutos = 0; minutos < 60; minutos += 30) {

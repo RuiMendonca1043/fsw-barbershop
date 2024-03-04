@@ -60,6 +60,7 @@ const SchedulingConfirmation = ({ params }: { params: { barberId: string } }) =>
         }
 
         toast.success("Marcação realizada com sucesso!", { position: "bottom-center" });
+        return router.push('/')
     };
     
     const name = searchParams.get("name") as string;

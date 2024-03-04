@@ -32,7 +32,6 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
     const day = watch('day');
     const router = useRouter();
     const handleSelectChange = (event:any) => {
-        console.log('MUDOU')
         const selectedValue = event.target.value;
         setTime(selectedValue);
       };
@@ -57,7 +56,6 @@ const BarberReservation = ({barberId,dayOff}:BarberReservationProps) => {
 
 
     const onSubmit =async (data:BarberReservationForm) => {
-        console.log("OLA")
         const response = await fetch('/api/teste/schedulecheck',{
             method: 'POST',
             mode: 'no-cors',
